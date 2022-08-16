@@ -1,5 +1,7 @@
 # FaceAntiSpoofingModel
 
+This Project implements the DeePixBiS model using Python OpenCV, and the Pytorch Framework. This project is inspired from https://github.com/voqtuyen/deep-pix-bis-pad.pytorch and https://github.com/Saiyam26/Face-Anti-Spoofing-using-DeePixBiS.git
+
 ### Requirements
 
 - Python 3.6+
