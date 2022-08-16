@@ -8,11 +8,11 @@ from Model import DeePixBiS
 from Loss import PixWiseBCELoss
 from Metrics import predict, test_accuracy, test_loss
 from Trainer import Trainer
-"""from torch.utils.mobile_optimizer import optimize_for_mobile"""
+
 
 
 model = DeePixBiS()
-model.load_state_dict(torch.load('./MyModel.pth'))
+#model.load_state_dict(torch.load('./MyModel.pth'))
 
 loss_fn = PixWiseBCELoss()
 
@@ -38,23 +38,9 @@ batch_size = 10
 train_dl = DataLoader(train_ds, batch_size, shuffle=True, num_workers=0, pin_memory=True)
 val_dl = DataLoader(val_ds, batch_size, shuffle=True, num_workers=0, pin_memory=True)
 
-# for x, y, z in val_dl:
-# 	_, zp = model(x)
-# 	print(zp)
-# 	print (z)
-# 	break
-
-# print(test_accuracy(model, train_dl))
-# print(test_loss(model, train_dl, loss_fn))
-
-# 5 epochs ran
-
 trainer = Trainer(train_dl, val_dl, model, 1, opt, loss_fn)
 
 print('Training Beginning\n')
 trainer.fit()
 print('\nTraining Complete')
-"""traced_script_module = torch.jit.trace(model, trainer)
-traced_script_module_optimized = optimize_for_mobile(traced_script_module)
-traced_script_module_optimized._save_for_lite_interpreter("model.ptl")"""
 torch.save(model.state_dict(), './MyModel.pth')
