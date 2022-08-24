@@ -12,6 +12,7 @@ from Trainer import Trainer
 
 
 model = DeePixBiS()
+model.eval()
 #model.load_state_dict(torch.load('./MyModel.pth'))
 
 loss_fn = PixWiseBCELoss()
@@ -28,10 +29,10 @@ test_tfms = Compose([Resize([224, 224]),
                      ToTensor(),
                      Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
 
-train_dataset = PixWiseDataset('./train_data.csv', transform=train_tfms)
+train_dataset = PixWiseDataset('./data_training.csv', transform=train_tfms)
 train_ds = train_dataset.dataset()
 
-val_dataset = PixWiseDataset('./test_data.csv', transform=test_tfms)
+val_dataset = PixWiseDataset('./data_testing.csv', transform=test_tfms)
 val_ds = val_dataset.dataset()
 
 batch_size = 10
