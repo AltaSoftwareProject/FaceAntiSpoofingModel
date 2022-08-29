@@ -2,7 +2,7 @@ import csv
 import os 
 
 def convert_to_csv():
-    with open('data_training.csv', mode='w',newline='') as index_file:
+    with open('data_testing.csv', mode='w',newline='') as index_file:
         fieldnames = ['name', 'label']
         writer = csv.DictWriter(index_file, fieldnames=fieldnames)
 
