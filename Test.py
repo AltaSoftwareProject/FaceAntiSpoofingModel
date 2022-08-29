@@ -5,7 +5,7 @@ from torchvision import transforms
 import numpy as np
 from Model import DeePixBiS
 from Loss import PixWiseBCELoss
-from Metrics import predict, test_accuracy, test_loss
+
 
 model = DeePixBiS()
 model.load_state_dict(torch.load('./MyModel.pth'))
