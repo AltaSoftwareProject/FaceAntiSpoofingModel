@@ -10,8 +10,8 @@ import os
 # Import time
 import time
 
-labels = ['fake', 'real']
-number_imgs = 5
+labels = ['real', 'fake']
+number_imgs = 50
 
 IMAGES_PATH = os.path.join('./data')
 if not os.path.exists(IMAGES_PATH):
