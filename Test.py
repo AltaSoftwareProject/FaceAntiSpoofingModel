@@ -8,7 +8,7 @@ from Loss import PixWiseBCELoss
 from Metrics import predict, test_accuracy, test_loss
 
 model = DeePixBiS()
-model.load_state_dict(torch.load('./DeePixBiS.pth'))
+model.load_state_dict(torch.load('./MyModel.pth'))
 model.eval()
 
 tfms = transforms.Compose([
@@ -36,9 +36,9 @@ while cv.waitKey(1) & 0xFF != ord('q'):
         faceRegion = faceRegion.unsqueeze(0)
 
         mask, binary = model.forward(faceRegion)
-        res = torch.mean(mask).item()
-        # res = binary.item()
-        print(res)
+        # res = torch.mean(mask).item()
+        res = binary.item()
+        print(res,  torch.mean(mask).item())
         cv.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
         if res < 0.5:

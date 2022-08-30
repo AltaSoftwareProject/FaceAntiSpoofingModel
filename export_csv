@@ -1,0 +1,44 @@
+import csv
+import os
+import random
+import glob
+
+def shuffleList(myList):
+    all_items = myList[:]
+    random.shuffle(all_items)
+    return all_items[:-400], all_items[-400:]
+  
+
+
+def convert_to_csv():
+    my_folder_path = './use_data/real/*'
+    list_of_list = glob.glob(my_folder_path)
+    train_real, test_real = shuffleList(list_of_list)
+
+    my_folder_path = './use_data/spoof/*'
+    list_of_list = glob.glob(my_folder_path)
+    train_spoof, test_spoof = shuffleList(list_of_list)
+
+    with open('data_training.csv', mode='w',newline='') as index_file:
+        fieldnames = ['name', 'label']
+        writer = csv.DictWriter(index_file, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for my_file in train_real:
+            writer.writerow({'name': my_file.replace("/", "\\", 2), 'label': 1})
+        for my_file in train_spoof:
+            writer.writerow({'name': my_file.replace("/", "\\", 2), 'label': 0})
+    
+    with open('data_test.csv', mode='w',newline='') as index_file:
+        fieldnames = ['name', 'label']
+        writer = csv.DictWriter(index_file, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for my_file in test_real:
+            writer.writerow({'name': my_file.replace("/", "\\", 2), 'label': 1})
+        for my_file in test_spoof:
+            writer.writerow({'name': my_file.replace("/", "\\", 2), 'label': 0})
+                
+
+if __name__ == '__main__':
+    convert_csv = convert_to_csv()

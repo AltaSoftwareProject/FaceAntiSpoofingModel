@@ -16,7 +16,7 @@ class Trainer():
     def train_one_epoch(self, num):
         print(f'\nEpoch ({num+1}/{self.epochs})')
         print('----------------------------------')
-        # self.model.train()
+        self.model.train()
         for batch, (img, mask, label) in enumerate(self.train_dl):
             img, mask, label = img.to(self.device), mask.to(self.device), label.to(self.device)
             net_mask, net_label = self.model(img)
@@ -30,9 +30,10 @@ class Trainer():
             if batch % 9 == 0:
                 print(f'Loss : {loss}')
 
-        # self.model.eval()
-        test_acc = test_accuracy(self.model, self.val_dl)
-        test_los = test_loss(self.model, self.val_dl, self.loss_fn)
+        self.model.eval()
+        test_acc = test_accuracy(self.model, self.val_dl, self.device)
+
+        test_los = test_loss(self.model, self.val_dl, self.loss_fn, self.device)
 
         print(f'Test Accuracy : {test_acc}  Test Loss : {test_los}')
         return test_acc, test_los
